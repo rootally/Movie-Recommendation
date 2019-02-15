@@ -1,4 +1,5 @@
 click==6.7
+pandas==0.22.0
 Flask==0.12.2
 Flask-Login==0.4.0
 flask-mongoengine==0.9.3
