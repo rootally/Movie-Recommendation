@@ -73,7 +73,7 @@ def register():
                 return redirect(url_for('dashboard'))
     return render_template('register.html', form=form)
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated == True:
         return redirect(url_for('dashboard'))
@@ -130,19 +130,19 @@ def analyse():
     df.to_csv('tst.csv')
     return render_template('dashboard.html')
 
-@app.route("/")
-def index():
-    if current_user.is_authenticated == True:
-        return redirect(url_for('dashboard'))
-    form = RegForm()
-    if request.method == 'GET':
-        if form.validate():
-            check_user = User.objects(email=form.email.data).first()
-            if check_user:
-                if check_password_hash(check_user['password'], form.password.data):
-                    login_user(check_user)
-                    return redirect(url_for('dashboard'))
-    return render_template('index.html',form=form)
+# @app.route("/")
+# def index():
+#     if current_user.is_authenticated == True:
+#         return redirect(url_for('dashboard'))
+#     form = RegForm()
+#     if request.method == 'GET':
+#         if form.validate():
+#             check_user = User.objects(email=form.email.data).first()
+#             if check_user:
+#                 if check_password_hash(check_user['password'], form.password.data):
+#                     login_user(check_user)
+#                     return redirect(url_for('dashboard'))
+#     return render_template('index.html',form=form)
 
 if __name__ == "__main__":
 	app.run(debug=True)
